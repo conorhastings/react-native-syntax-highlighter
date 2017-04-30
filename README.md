@@ -3,6 +3,8 @@
 
 Syntax highlighting component for `React Native` using <a href='https://github.com/conorhastings/react-syntax-highlighter'> `react-syntax-highlighter`</a>
 
+<img src='./react-native-syntax-highlighter.gif' />
+
 ### Install
 
 `npm install react-native-syntax-highlighter --save`
