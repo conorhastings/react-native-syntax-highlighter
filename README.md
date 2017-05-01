@@ -5,6 +5,8 @@ Syntax highlighting component for `React Native` using <a href='https://github.c
 
 <img src='./react-native-syntax-highlighter.gif' />
 
+You can try it out with <a href='https://expo.io'>Expo</a> <a href='https://expo.io/@conor/test-native-syntax'>here</a>
+
 ### Install
 
 `npm install react-native-syntax-highlighter --save`
