@@ -41,11 +41,12 @@ function createChildren(stylesheet) {
 
 function createNativeElement({ node, stylesheet, key, defaultColor, fontFamily, fontSize = 12 }) {
   const { properties, type, tagName: TagName, value } = node;
+  const startingStyle = { fontFamily, fontSize, height: fontSize + 2 };
   if (type === 'text') {
     return (
       <Text 
         key={key} 
-        style={{ color: defaultColor, fontFamily, fontSize, height: fontSize + 2}}
+        style={Object.assign({ color: defaultColor }, startingStyle)}
       >
         {value}
       </Text>
@@ -57,7 +58,7 @@ function createNativeElement({ node, stylesheet, key, defaultColor, fontFamily, 
       Object.assign(
         { color: defaultColor }, 
         properties.style, 
-        { fontFamily, fontSize, height: fontSize + 2 }
+        startingStyle
       ),
       stylesheet
     );
