@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { createStyleObject } from 'react-syntax-highlighter/dist/create-element';
 import { defaultStyle } from'react-syntax-highlighter/dist/styles';
