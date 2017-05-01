@@ -12,7 +12,7 @@ function generateNewStylesheet(stylesheet) {
       }
       else if (value.includes('em')) {
         const [num] = value.split('em');
-        newStyle[key] = Number(num) * 1;
+        newStyle[key] = Number(num) * 16;
       }
       else if (key === 'background') {
         newStyle.backgroundColor = value;
