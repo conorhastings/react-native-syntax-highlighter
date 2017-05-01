@@ -68,16 +68,14 @@ function createNativeElement({ node, stylesheet, key, defaultColor, fontFamily, 
 }
 
 function nativeRenderer({ defaultColor, fontFamily, fontSize }) {
-  return ({ rows, stylesheet }) => {
-    return rows.map((node, i) => createNativeElement({
-      node,
-      stylesheet,
-      key: `code-segment-${i}`,
-      defaultColor,
-      fontFamily,
-      fontSize
-    }))
-  }
+  return ({ rows, stylesheet }) => rows.map((node, i) => createNativeElement({
+    node,
+    stylesheet,
+    key: `code-segment-${i}`,
+    defaultColor,
+    fontFamily,
+    fontSize
+  }))
 }
 
 
