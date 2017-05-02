@@ -18,7 +18,7 @@ function generateNewStylesheet(stylesheet) {
         newStyle.backgroundColor = value;
       }
       else if (key === 'display') {
-        return newStyle
+        return newStyle;
       }
       else {
         newStyle[key] = value;
