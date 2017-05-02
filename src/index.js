@@ -17,6 +17,9 @@ function generateNewStylesheet(stylesheet) {
       else if (key === 'background') {
         newStyle.backgroundColor = value;
       }
+      else if (key === 'display') {
+        return newStyle
+      }
       else {
         newStyle[key] = value;
       }
@@ -44,8 +47,8 @@ function createNativeElement({ node, stylesheet, key, defaultColor, fontFamily, 
   const startingStyle = { fontFamily, fontSize, height: fontSize + 2 };
   if (type === 'text') {
     return (
-      <Text 
-        key={key} 
+      <Text
+        key={key}
         style={Object.assign({ color: defaultColor }, startingStyle)}
       >
         {value}
@@ -56,8 +59,8 @@ function createNativeElement({ node, stylesheet, key, defaultColor, fontFamily, 
     const style = createStyleObject(
       properties.className,
       Object.assign(
-        { color: defaultColor }, 
-        properties.style, 
+        { color: defaultColor },
+        properties.style,
         startingStyle
       ),
       stylesheet
@@ -90,8 +93,8 @@ function NativeSyntaxHighlighter({ fontFamily, fontSize, style, children, ...res
       {...rest}
       style={transformedStyle}
       horizontal={true}
-      renderer={(nativeRenderer({ 
-        defaultColor, 
+      renderer={(nativeRenderer({
+        defaultColor,
         fontFamily,
         fontSize
       }))}
