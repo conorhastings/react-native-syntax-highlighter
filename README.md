@@ -27,3 +27,84 @@ const Component = () => {
   return <SyntaxHighlighter language='javascript' style={docco}>{codeString}</SyntaxHighlighter>;  
 }
 ```
+
+### Styles Available   
+
+- agate
+- androidstudio
+- arduinoLight
+- arta
+- ascetic
+- atelierCaveDark
+- atelierCaveLight
+- atelierDuneDark
+- atelierDuneLight
+- atelierEstuaryDark
+- atelierEstuaryLight
+- atelierForestDark
+- atelierForestLight
+- atelierHeathDark
+- atelierHeathLight
+- atelierLakesideDark
+- atelierLakesideLight
+- atelierPlateauDark
+- atelierPlateauLight
+- atelierSavannaDark
+- atelierSavannaLight
+- atelierSeasideDark
+- atelierSeasideLight
+- atelierSulphurpoolDark
+- atelierSurphulpoolLight
+- atomOneDark
+- atomOneLight
+- brownPaper
+- codepenEmbed
+- colorBrewer
+- dark
+- darkula
+- defaultStyle
+- docco
+- dracula
+- far
+- foundation
+- githubGist
+- github
+- googlecode
+- grayscale
+- gruvboxDark
+- gruvboxLight
+- hopscotch
+- hybrid
+- idea
+- irBlack
+- kimbieDark
+- kimbieLight
+- magula
+- monoBlue
+- monokaiSublime
+- monokai
+- obsidian
+- ocean
+- paraisoDark
+- paraisoLight
+- pojoaque
+- purebasic
+- qtcreatorDark
+- qtcreatorLight
+- railscasts
+- rainbow
+- schoolBook
+- solarizedDark
+- solarizedLight
+- sunburst
+- tomorrowNightBlue
+- tomorrowNightBright
+- tomorrowNightEighties
+- tomorrowNight
+- tomorrow
+- vs
+- xcode
+- xt256
+- zenburn
+
+
