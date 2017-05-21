@@ -4,8 +4,14 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { createStyleObject } from 'react-syntax-highlighter/dist/create-element';
 import { defaultStyle } from'react-syntax-highlighter/dist/styles';
 
+
+const styleCache = new Map();
+
 function generateNewStylesheet(stylesheet) {
-  return Object.entries(stylesheet).reduce((newStylesheet, [className, style]) => {
+  if (styleCache.has(stylesheet)) {
+    return styleCache.get(stylesheet);
+  }
+  const transformedStyle = Object.entries(stylesheet).reduce((newStylesheet, [className, style]) => {
     newStylesheet[className] = Object.entries(style).reduce((newStyle, [key, value]) => {
       if (key === 'overflowX') {
         newStyle.overflow = value === 'auto' ? 'scroll' : value;
@@ -27,6 +33,8 @@ function generateNewStylesheet(stylesheet) {
     }, {});
     return newStylesheet;
   }, {});
+  styleCache.set(stylesheet, transformedStyle);
+  return transformedStyle;
 }
 
 function createChildren(stylesheet) {
