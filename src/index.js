@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ScrollView } from 'react-native';
+import { Text, ScrollView, Platform } from 'react-native';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { createStyleObject } from 'react-syntax-highlighter/dist/create-element';
 import { defaultStyle } from'react-syntax-highlighter/dist/styles';
@@ -113,7 +113,7 @@ function NativeSyntaxHighlighter({ fontFamily, fontSize, style, children, ...res
 }
 
 NativeSyntaxHighlighter.defaultProps = {
-  fontFamily: 'Menlo-Regular',
+  fontFamily: Platform.OS === 'ios' ? 'Menlo-Regular' : 'monospace',
   fontSize: 12,
   style: defaultStyle,
   PreTag: ScrollView,
