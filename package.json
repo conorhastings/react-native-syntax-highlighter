@@ -1,6 +1,6 @@
 {
   "name": "react-native-syntax-highlighter",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "a react native component for syntax highlighting",
   "main": "dist/index.js",
   "scripts": {
