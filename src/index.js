@@ -37,7 +37,7 @@ function generateNewStylesheet(stylesheet) {
   return transformedStyle;
 }
 
-function createChildren(stylesheet) {
+function createChildren({ stylesheet, fontSize, fontFamily }) {
   let childrenCount = 0;
   return (children, defaultColor) => {
     childrenCount += 1;
@@ -45,7 +45,9 @@ function createChildren(stylesheet) {
       node: child,
       stylesheet,
       key:`code-segment-${childrenCount}-${i}`,
-      defaultColor
+      defaultColor,
+      fontSize,
+      fontFamily
     }));
   }
 }
@@ -63,7 +65,7 @@ function createNativeElement({ node, stylesheet, key, defaultColor, fontFamily, 
       </Text>
     );
   } else if (TagName) {
-    const childrenCreator = createChildren(stylesheet);
+    const childrenCreator = createChildren({ stylesheet, fontSize, fontFamily });
     const style = createStyleObject(
       properties.className,
       Object.assign(
