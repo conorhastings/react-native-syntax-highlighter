@@ -38,7 +38,7 @@ function generateNewStylesheet(stylesheet) {
     delete transformedStyle.hljs.color;
   }  
   styleCache.set(stylesheet, { transformedStyle, defaultColor });
-  return transformedStyle;
+  return  { transformedStyle, defaultColor };
 }
 
 function createChildren({ stylesheet, fontSize, fontFamily }) {
