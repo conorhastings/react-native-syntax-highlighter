@@ -33,7 +33,11 @@ function generateNewStylesheet(stylesheet) {
     }, {});
     return newStylesheet;
   }, {});
-  styleCache.set(stylesheet, transformedStyle);
+  const defaultColor = transformedStyle.hljs && transformedStyle.hljs.color || '#000';
+  if (transformedStyle.hljs && transformedStyle.hljs.color) {
+    delete transformedStyle.hljs.color;
+  }  
+  styleCache.set(stylesheet, { transformedStyle, defaultColor });
   return transformedStyle;
 }
 
@@ -93,11 +97,7 @@ function nativeRenderer({ defaultColor, fontFamily, fontSize }) {
 
 
 function NativeSyntaxHighlighter({ fontFamily, fontSize, style, children, ...rest}) {
-  const transformedStyle = generateNewStylesheet(style);
-  const defaultColor = transformedStyle.hljs && transformedStyle.hljs.color || '#000';
-  if (transformedStyle.hljs && transformedStyle.hljs.color) {
-    delete transformedStyle.hljs.color;
-  }
+  const { transformedStyle, defaultColor } = generateNewStylesheet(style);
   return (
     <SyntaxHighlighter
       {...rest}
