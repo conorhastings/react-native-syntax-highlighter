@@ -28,6 +28,15 @@ const Component = () => {
 }
 ```
 
+### Unsupported Props
+Some of the react-syntax-highlighter props are not currently supported by the mobile version, you can see which listed below:
+
+- useInlineStyles
+- showLineNumbers
+- startingLineNumber
+- lineNumberContainerStyle
+- lineNumberStyle
+
 ### Styles Available   
 
 - agate
