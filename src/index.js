@@ -58,7 +58,7 @@ function createChildren({ stylesheet, fontSize, fontFamily }) {
 
 function createNativeElement({ node, stylesheet, key, defaultColor, fontFamily, fontSize = 12 }) {
   const { properties, type, tagName: TagName, value } = node;
-  const startingStyle = { fontFamily, fontSize, height: fontSize + 2 };
+  const startingStyle = { fontFamily, fontSize, height: fontSize + 5 };
   if (type === 'text') {
     return (
       <Text
