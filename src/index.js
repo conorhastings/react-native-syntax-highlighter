@@ -1,13 +1,14 @@
 import React from 'react';
 import { Text, ScrollView, Platform } from 'react-native';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { createStyleObject } from 'react-syntax-highlighter/dist/create-element';
-import { defaultStyle } from'react-syntax-highlighter/dist/styles';
-
+import SyntaxHighlighterPrism from 'react-syntax-highlighter/prism';
+import { createStyleObject } from 'react-syntax-highlighter/create-element';
+import { defaultStyle } from'react-syntax-highlighter/styles/hljs';
+import { prism as prismDefaultStyle } from'react-syntax-highlighter/styles/prism'; 
 
 const styleCache = new Map();
 
-function generateNewStylesheet(stylesheet) {
+function generateNewStylesheet({ stylesheet, renderer }) {
   if (styleCache.has(stylesheet)) {
     return styleCache.get(stylesheet);
   }
@@ -33,7 +34,17 @@ function generateNewStylesheet(stylesheet) {
     }, {});
     return newStylesheet;
   }, {});
-  const defaultColor = transformedStyle.hljs && transformedStyle.hljs.color || '#000';
+  const defaultColor = (
+    renderer === "prism"
+    ?
+    (
+      transformedStyle['pre[class*=\"language-\"]'] &&
+      transformedStyle['pre[class*=\"language-\"]'].color ||
+      '#000'
+    )
+    :
+    transformedStyle.hljs && transformedStyle.hljs.color || '#000'
+  );
   if (transformedStyle.hljs && transformedStyle.hljs.color) {
     delete transformedStyle.hljs.color;
   }  
@@ -96,10 +107,24 @@ function nativeRenderer({ defaultColor, fontFamily, fontSize }) {
 }
 
 
-function NativeSyntaxHighlighter({ fontFamily, fontSize, style, children, ...rest}) {
+function NativeSyntaxHighlighter({ 
+  fontFamily, 
+  fontSize, 
+  children, 
+  highlighter = "highlightjs", 
+  style = highlighter === "prism" ? prismDefaultStyle : defaultStyle,
+  ...rest
+}) {
   const { transformedStyle, defaultColor } = generateNewStylesheet(style);
+  const Highlighter = (
+    highlighter === "prism" 
+    ? 
+    SyntaxHighlighterPrism 
+    : 
+    SyntaxHighlighter
+  );
   return (
-    <SyntaxHighlighter
+    <Highlighter
       {...rest}
       style={transformedStyle}
       horizontal={true}
@@ -110,14 +135,13 @@ function NativeSyntaxHighlighter({ fontFamily, fontSize, style, children, ...res
       }))}
     >
       {children}
-    </SyntaxHighlighter>
+    </Highlighter>
   );
 }
 
 NativeSyntaxHighlighter.defaultProps = {
   fontFamily: Platform.OS === 'ios' ? 'Menlo-Regular' : 'monospace',
   fontSize: 12,
-  style: defaultStyle,
   PreTag: ScrollView,
   CodeTag: ScrollView
 };
