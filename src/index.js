@@ -8,7 +8,7 @@ import { prism as prismDefaultStyle } from'react-syntax-highlighter/styles/prism
 
 const styleCache = new Map();
 
-function generateNewStylesheet({ stylesheet, renderer }) {
+function generateNewStylesheet({ stylesheet, highlighter }) {
   if (styleCache.has(stylesheet)) {
     return styleCache.get(stylesheet);
   }
@@ -35,7 +35,7 @@ function generateNewStylesheet({ stylesheet, renderer }) {
     return newStylesheet;
   }, {});
   const defaultColor = (
-    renderer === "prism"
+    highlighter === "prism"
     ?
     (
       transformedStyle['pre[class*=\"language-\"]'] &&
@@ -115,7 +115,10 @@ function NativeSyntaxHighlighter({
   style = highlighter === "prism" ? prismDefaultStyle : defaultStyle,
   ...rest
 }) {
-  const { transformedStyle, defaultColor } = generateNewStylesheet(style);
+  const { transformedStyle, defaultColor } = generateNewStylesheet({
+    stylesheet: style,
+    highlighter
+  });
   const Highlighter = (
     highlighter === "prism" 
     ? 
