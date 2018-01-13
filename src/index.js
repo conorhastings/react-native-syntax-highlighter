@@ -8,13 +8,32 @@ import { prism as prismDefaultStyle } from'react-syntax-highlighter/styles/prism
 
 const styleCache = new Map();
 
+const topLevelPropertiesToRemove = [
+  "color", 
+  "textShadow", 
+  "textAlign", 
+  "whiteSpace", 
+  "wordSpacing",
+  "wordBreak",
+  "wordWrap",
+  "lineHeight",
+  "MozTabSize",
+  "OTabSize",
+  "tabSize",
+  "WebkitHyphens",
+  "MozHyphens",
+  "msHyphens",
+  "hyphens",
+  "fontFamily"
+];
+
 function generateNewStylesheet({ stylesheet, highlighter }) {
   if (styleCache.has(stylesheet)) {
     return styleCache.get(stylesheet);
   }
   const transformedStyle = Object.entries(stylesheet).reduce((newStylesheet, [className, style]) => {
     newStylesheet[className] = Object.entries(style).reduce((newStyle, [key, value]) => {
-      if (key === 'overflowX') {
+      if (key === 'overflowX' || key === "overflow") {
         newStyle.overflow = value === 'auto' ? 'scroll' : value;
       }
       else if (value.includes('em')) {
@@ -34,20 +53,27 @@ function generateNewStylesheet({ stylesheet, highlighter }) {
     }, {});
     return newStylesheet;
   }, {});
-  const defaultColor = (
-    highlighter === "prism"
-    ?
-    (
-      transformedStyle['pre[class*=\"language-\"]'] &&
-      transformedStyle['pre[class*=\"language-\"]'].color ||
-      '#000'
-    )
-    :
-    transformedStyle.hljs && transformedStyle.hljs.color || '#000'
-  );
-  if (transformedStyle.hljs && transformedStyle.hljs.color) {
-    delete transformedStyle.hljs.color;
-  }  
+  const topLevel = highlighter === "prism" ?  transformedStyle['pre[class*=\"language-\"]'] :  transformedStyle.hljs;
+  const defaultColor = topLevel && topLevel.color || "#000";
+  topLevelPropertiesToRemove.forEach(property => {
+    if (topLevel[property]) {
+      delete topLevel[property];
+    }
+  });
+  if (topLevel.backgroundColor === "none") {
+    delete topLevel.backgroundColor;
+  }
+  const codeLevel =  transformedStyle['code[class*=\"language-\"]'];
+  if (highlighter === "prism" && !!codeLevel) {
+    topLevelPropertiesToRemove.forEach(property => {
+      if (codeLevel[property]) {
+        delete codeLevel[property];
+      }
+    });
+    if (codeLevel.backgroundColor === "none") {
+      delete codeLevel.backgroundColor;
+    }
+  }
   styleCache.set(stylesheet, { transformedStyle, defaultColor });
   return  { transformedStyle, defaultColor };
 }
