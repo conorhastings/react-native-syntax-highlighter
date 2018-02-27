@@ -3,6 +3,12 @@
 
 Syntax highlighting component for `React Native` using <a href='https://github.com/conorhastings/react-syntax-highlighter'> `react-syntax-highlighter`</a>
 
+You can see a <a href="https://snack.expo.io/BypG26zdz">demo</a> using snack by <a href="https://expo.io">Expo</a>
+
+Alternatively you can scan this qr code in The Expo app to access on your phone:
+
+<img src="./qr.png" />
+
 ### With Highlight.js vdom
 <img src='./react-native-syntax-highlighter.gif' />
 
