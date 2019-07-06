@@ -31,6 +31,12 @@ function generateNewStylesheet({ stylesheet, highlighter }) {
   if (styleCache.has(stylesheet)) {
     return styleCache.get(stylesheet);
   }
+  // I don't know why, but sometimes 'stylesheet' comes as an Array
+  // like this [{ stylesheet }, { opacity: 0.85 }], instead of an Object,
+  // so this throws an error referenced at issue #17
+  // So, this is a workaround, if the  stylesheet is an Array,
+  // returns the first element, wich is the actual style object.
+  stylesheet = Array.isArray(stylesheet) ? stylesheet[0] : stylesheet;
   const transformedStyle = Object.entries(stylesheet).reduce((newStylesheet, [className, style]) => {
     newStylesheet[className] = Object.entries(style).reduce((newStyle, [key, value]) => {
       if (key === 'overflowX' || key === "overflow") {
