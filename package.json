@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "description": "a react native component for syntax highlighting",
   "main": "dist/index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "build": "babel src --out-dir dist",
     "prepublish": "npm run build"
@@ -27,7 +28,8 @@
   },
   "homepage": "https://github.com/conorhastings/react-native-syntax-highlighter#readme",
   "dependencies": {
-    "react-syntax-highlighter": "^6.0.4"
+    "react-syntax-highlighter": "^6.0.4",
+    "@types/react-syntax-highlighter": "^13.5.0"
   },
   "peerDependencies": {
     "react-syntax-highlighter": "^6.0.4"
