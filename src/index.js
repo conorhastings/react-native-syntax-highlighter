@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, ScrollView, Platform } from 'react-native';
+import "./prism-config.js";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import SyntaxHighlighterPrism from 'react-syntax-highlighter/prism';
 import { createStyleObject } from 'react-syntax-highlighter/create-element';
