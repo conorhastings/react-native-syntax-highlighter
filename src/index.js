@@ -25,7 +25,10 @@ const topLevelPropertiesToRemove = [
   "MozHyphens",
   "msHyphens",
   "hyphens",
-  "fontFamily"
+  "fontFamily",
+  "WebkitBoxSizing",
+  "MozBoxSizing",
+  "boxSizing"
 ];
 
 function generateNewStylesheet({ stylesheet, highlighter }) {
